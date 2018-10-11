@@ -26,7 +26,7 @@ public class StarbucksTests extends BaseTests {
         };
     }
 
-    @Test(enabled = false)
+    @Test
     public void menu() {
         String[] expectedElements = {"COFFEE", "TEA", "MENU", "COFFEEHOUSE", "SOCIAL IMPACT", "STARBUCKS REWARDS", "BLOG", "GIFT CARDS"};
 
@@ -37,7 +37,7 @@ public class StarbucksTests extends BaseTests {
     }
 
 
-    @Test(dataProvider = "coffeeFinderData", enabled = false)
+    @Test(dataProvider = "coffeeFinderData")
     public void findYourPerfectCoffee(String optOne, String optionTwo, String optionThree, String optionFour) {
         CoffeeFinderPage page = homePage.clickFindYourPerfectCoffee();
         page.setOptionQuestionOne(optOne);
