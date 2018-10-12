@@ -3,6 +3,8 @@ package com.globant.training.automation.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CheckoutPage extends BasePage{
 
@@ -22,6 +24,7 @@ public class CheckoutPage extends BasePage{
     }
 
     public String getButtonText() {
+        new WebDriverWait(getDriver(), 10).until(ExpectedConditions.visibilityOf(continueButton));
         return continueButton.getText();
     }
 }
