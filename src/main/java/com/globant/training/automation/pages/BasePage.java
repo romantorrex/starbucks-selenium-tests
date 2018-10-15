@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
-public class BasePage {
+public abstract class BasePage {
     private WebDriver driver;
 
     public BasePage(WebDriver driver) {
@@ -23,5 +23,11 @@ public class BasePage {
 
     protected void implicitWait(int seconds) {
         driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+    }
+
+    public void dispose() {
+        if (this.driver != null) {
+            driver.quit();
+        }
     }
 }

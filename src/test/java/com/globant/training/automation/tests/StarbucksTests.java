@@ -36,7 +36,7 @@ public class StarbucksTests extends BaseTests {
         };
     }
 
-    @Test(enabled = false)
+    @Test
     public void menu() {
         String[] expectedElements = {"COFFEE", "TEA", "MENU", "COFFEEHOUSE", "SOCIAL IMPACT", "STARBUCKS REWARDS", "BLOG", "GIFT CARDS"};
 
@@ -46,14 +46,21 @@ public class StarbucksTests extends BaseTests {
         assertThat(menu).asList().contains(expectedElements);
     }
 
-
-    @Test(dataProvider = "coffeeFinderData", enabled = false)
+    @Test(dataProvider = "coffeeFinderData")
     public void findYourPerfectCoffee(String optOne, String optionTwo, String optionThree, String optionFour) {
         CoffeeFinderPage page = homePage.clickFindYourPerfectCoffee();
         page.setOptionQuestionOne(optOne);
+        assertThat(page.getFristAnswer()).isEqualTo(optOne);
+
         page.setOptionQuestionTwo(optionTwo);
+        assertThat(page.getSecondAnswer()).isEqualTo(optionTwo);
+
         page.setOptionQuestionThree(optionThree);
+        assertThat(page.getThirdAnswer()).isEqualTo(optionThree);
+
         page.setOptionQuestionFour(optionFour);
+        assertThat(page.getFourthAnswer()).isEqualTo(optionFour);
+
         CoffeeFinderResultPage resultPage = page.clickFindMyCoffee();
         assertThat(resultPage.getCurrentUrl()).isEqualTo(COFFEE_FINDER_URL);
         assertThat(resultPage.isFeaturedCoffesResulDisplayed()).isTrue();

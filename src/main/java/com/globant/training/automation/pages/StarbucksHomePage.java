@@ -11,15 +11,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StarbucksHomePage extends BasePage {
-    private WebDriver driver;
-
     @FindBy(css = "a.tab strong")
     private List<WebElement> menuItems;
 
-    @FindBy(css = "#menu_coffee div ol.blocks.blocks-four-up li:nth-child(2) p a")
+    @FindBy(xpath = "//li[@id='menu_coffee']//a[text() = 'Find Your Perfect Coffee']")
     private WebElement findYourPerfectCoffee;
 
-    @FindBy(id ="nav_coffee")
+    @FindBy(id = "nav_coffee")
     private WebElement menuCoffee;
 
     @FindBy(id = "signIn")
@@ -27,33 +25,25 @@ public class StarbucksHomePage extends BasePage {
 
     public StarbucksHomePage(WebDriver driver) {
         super(driver);
-        this.driver = driver;
     }
 
     public List<String> getMenu() {
-        menuItems.forEach(i -> System.out.println(i.getText()));
         return menuItems.stream().map(element -> element.getText()).collect(Collectors.toList());
     }
 
     public CoffeeFinderPage clickFindYourPerfectCoffee() {
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions(getDriver());
 
         actions.moveToElement(menuCoffee).perform();
-        new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(findYourPerfectCoffee));
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOf(findYourPerfectCoffee));
         findYourPerfectCoffee.click();
 
-        return new CoffeeFinderPage(driver);
-    }
-
-    public void dispose() {
-        if (this.driver != null) {
-            driver.quit();
-        }
+        return new CoffeeFinderPage(getDriver());
     }
 
     public SignInPage goToSignInPage() {
         signInLink.click();
 
-        return new SignInPage(driver);
+        return new SignInPage(getDriver());
     }
 }
