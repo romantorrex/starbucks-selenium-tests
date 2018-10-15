@@ -1,4 +1,4 @@
-package com.globant.training.automation.tests;
+package com.globant.training.automation;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;

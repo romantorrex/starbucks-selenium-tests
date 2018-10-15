@@ -1,5 +1,6 @@
 package com.globant.training.automation.tests;
 
+import com.globant.training.automation.MyDriver;
 import com.globant.training.automation.pages.StarbucksHomePage;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
