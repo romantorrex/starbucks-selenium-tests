@@ -49,16 +49,16 @@ public class StarbucksTests extends BaseTests {
     @Test(dataProvider = "coffeeFinderData")
     public void findYourPerfectCoffee(String optOne, String optionTwo, String optionThree, String optionFour) {
         CoffeeFinderPage page = homePage.clickFindYourPerfectCoffee();
-        page.setOptionQuestionOne(optOne);
+        page.answerQuestionOne(optOne);
         assertThat(page.getFristAnswer()).isEqualTo(optOne);
 
-        page.setOptionQuestionTwo(optionTwo);
+        page.answerQuestionTwo(optionTwo);
         assertThat(page.getSecondAnswer()).isEqualTo(optionTwo);
 
-        page.setOptionQuestionThree(optionThree);
+        page.answerQuestionThree(optionThree);
         assertThat(page.getThirdAnswer()).isEqualTo(optionThree);
 
-        page.setOptionQuestionFour(optionFour);
+        page.answerQuestionFour(optionFour);
         assertThat(page.getFourthAnswer()).isEqualTo(optionFour);
 
         CoffeeFinderResultPage resultPage = page.clickFindMyCoffee();

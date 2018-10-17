@@ -7,23 +7,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class CoffeeFinderPage extends BasePage {
     @FindBy(css = "#question1 button h3")
-    private List<WebElement> questionOneOptions;
-
-    @FindBy(xpath = "//div[@class='collapsed-selection']/h4")
-    private List<WebElement> answers;
+    private List<WebElement> questionOneAnswers;
 
     @FindBy(css = "#question2 button h3")
-    private List<WebElement> questionTwoOptions;
+    private List<WebElement> questionTwoAnswers;
 
     @FindBy(css = "#question3 button h3")
-    private List<WebElement> questionThreeOptions;
+    private List<WebElement> questionThreeAnswers;
 
     @FindBy(css = "#question4 button h3")
-    private List<WebElement> questionFourOptions;
+    private List<WebElement> questionFourAnswers;
+
+    @FindBy(xpath = "//div[@class='collapsed-selection']/h4")
+    private List<WebElement> selectedAnswers;
 
     @FindBy(id = "find-my-coffee")
     private WebElement findMyCoffeeButton;
@@ -32,53 +31,84 @@ public class CoffeeFinderPage extends BasePage {
         super(driver);
     }
 
-    public void setOptionQuestionOne(String optionSelected) {
-        setOptionToQuestion(questionOneOptions, optionSelected);
+    /**
+     * Selects an answer for question one
+     * @param answer Text of the answer selected
+     */
+    public void answerQuestionOne(String answer) {
+        selectAnswerForQuestion(questionOneAnswers, answer);
     }
 
-    public void setOptionQuestionTwo(String optionSelected) {
-        setOptionToQuestion(questionTwoOptions, optionSelected);
+    /**
+     * Selects an answer for question two
+     * @param answer Text of the answer selected
+     */
+    public void answerQuestionTwo(String answer) {
+        selectAnswerForQuestion(questionTwoAnswers, answer);
     }
 
-    public void setOptionQuestionThree(String optionSelected) {
-        setOptionToQuestion(questionThreeOptions, optionSelected);
+    /**
+     * Selects an answer for question three
+     * @param answer Text of the answer selected
+     */
+    public void answerQuestionThree(String answer) {
+        selectAnswerForQuestion(questionThreeAnswers, answer);
     }
 
-    public void setOptionQuestionFour(String optionSelected) {
-        setOptionToQuestion(questionFourOptions, optionSelected);
+    /**
+     * Selects an answer for question four
+     * @param answer Text of the answer selected
+     */
+    public void answerQuestionFour(String answer) {
+        selectAnswerForQuestion(questionFourAnswers, answer);
     }
 
+    /**
+     * Returns the answer selected for question one
+     * @return The text of the option selected
+     */
     public String getFristAnswer() {
-        return answers.get(0).getText();
+        return selectedAnswers.get(0).getText();
     }
 
+    /**
+     * Returns the answer selected for question two
+     * @return The text of the option selected
+     */
     public String getSecondAnswer() {
-        return answers.get(1).getText();
+        return selectedAnswers.get(1).getText();
     }
 
+    /**
+     * Returns the answer selected for question three
+     * @return The text of the option selected
+     */
     public String getThirdAnswer() {
-        return answers.get(2).getText().isEmpty() ?
-                (answers.get(3).getText().isEmpty() ? answers.get(4).getText() : answers.get(3).getText())
-                : answers.get(2).getText();
+        return selectedAnswers.get(2).getText().isEmpty() ?
+                (selectedAnswers.get(3).getText().isEmpty() ? selectedAnswers.get(4).getText() : selectedAnswers.get(3).getText())
+                : selectedAnswers.get(2).getText();
     }
 
+    /**
+     * Returns the answer selected for question four
+     * @return The text of the option selected
+     */
     public String getFourthAnswer() {
-        return answers.get(5).getText();
+        return selectedAnswers.get(5).getText();
     }
 
-    private WebElement findButton(List<WebElement> answers, Predicate<WebElement> predicate) {
-        WebElement button = answers
+    /**
+     * Iterates the given answer options and selects the one that matches the given text
+     * @param answerOptions The option list of answers for a given question.
+     * @param answerSelectedText The text of the answer selected
+     */
+    void selectAnswerForQuestion(List<WebElement> answerOptions, String answerSelectedText) {
+        WebElement answerSelected = answerOptions
                 .stream()
-                .filter(predicate)
+                .filter(answer -> answer.getText().equals(answerSelectedText))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Option not available"));
-
-        return button;
-    }
-
-    void setOptionToQuestion(List<WebElement> questionOptions, String optionSelected) {
-        WebElement button = findButton(questionOptions, option -> option.getText().equals(optionSelected));
-        button.click();
+                .orElseThrow(() -> new RuntimeException("Option not available"));;
+        answerSelected.click();
     }
 
     public CoffeeFinderResultPage clickFindMyCoffee() {
