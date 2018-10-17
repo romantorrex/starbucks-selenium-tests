@@ -22,11 +22,18 @@ public class StarbucksTests extends BaseTests {
     public static final String CONTINUE_BUTTON_TEXT = "Continue";
     private StarbucksHomePage homePage;
 
+    /**
+     * Method that set the browser to the home page before starting each test
+     */
     @BeforeMethod
     public void beforeTest() {
         homePage = getHomePage();
     }
 
+    /**
+     * Data for the second exercise
+     * @return The answers for the Find your coffee page
+     */
     @DataProvider(name = "coffeeFinderData")
     public Object[][] dataForFindYourCoffee() {
         return new Object[][]{
@@ -36,8 +43,11 @@ public class StarbucksTests extends BaseTests {
         };
     }
 
+    /**
+     * Test that the menu contains all the expected elements
+     */
     @Test
-    public void menu() {
+    public void menuContainsAllElements() {
         String[] expectedElements = {"COFFEE", "TEA", "MENU", "COFFEEHOUSE", "SOCIAL IMPACT", "STARBUCKS REWARDS", "BLOG", "GIFT CARDS"};
 
         List<String> menu = homePage.getMenu();
@@ -46,6 +56,9 @@ public class StarbucksTests extends BaseTests {
         assertThat(menu).asList().contains(expectedElements);
     }
 
+    /**
+     * Test find your coffee page
+     */
     @Test(dataProvider = "coffeeFinderData")
     public void findYourPerfectCoffee(String optOne, String optionTwo, String optionThree, String optionFour) {
         CoffeeFinderPage page = homePage.clickFindYourPerfectCoffee();
@@ -66,6 +79,9 @@ public class StarbucksTests extends BaseTests {
         assertThat(resultPage.isFeaturedCoffesResulDisplayed()).isTrue();
     }
 
+    /**
+     * Test gift card page
+     */
     @Test
     public void giftCards() {
         SignInPage signInPage = homePage.goToSignInPage();
