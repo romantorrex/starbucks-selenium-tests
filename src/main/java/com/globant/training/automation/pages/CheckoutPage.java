@@ -6,10 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CheckoutPage extends BasePage{
+public class CheckoutPage extends BasePage {
+    private static final String PAYMENT_OPTION = "Masterpass";
 
     @FindBy(id = "paymentMethod")
-    private WebElement paymentOption;
+    private WebElement paymentSelect;
 
     @FindBy(xpath = "//button[@data-e2e='sendGift']")
     private WebElement continueButton;
@@ -20,7 +21,7 @@ public class CheckoutPage extends BasePage{
     }
 
     public void chooseCreditCardPaymentOption() {
-        paymentOption.sendKeys("Masterpass");
+        paymentSelect.sendKeys(PAYMENT_OPTION);
     }
 
     public String getButtonText() {
