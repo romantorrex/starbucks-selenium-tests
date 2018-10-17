@@ -5,6 +5,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class that contains methods that are common for all the pages that are tested.
+ */
 public abstract class BasePage {
     private WebDriver driver;
 
