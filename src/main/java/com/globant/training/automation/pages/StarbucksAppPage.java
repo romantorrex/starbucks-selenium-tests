@@ -9,15 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class StarbucksAppPage extends BasePage {
-
-    @FindBy(xpath = "//div[@id='carousel46']/div[2]/div[1]/a")
-    private WebElement giftCard;
-
     @FindBy(xpath = "*//a[@data-product-category='Cards']")
     private List<WebElement> giftCards;
 
-    @FindBy(xpath = "//nav/ul/li[3]/a")
+    @FindBy(xpath = "//nav/ul/li/a[text() = 'Gift']")
     private WebElement giftMenu;
+
     @FindBy(xpath = "//div[@class='py6']")
     private WebElement giftCardsDiv;
 

@@ -13,7 +13,7 @@ public class GiftCardPage extends BasePage {
     private WebElement amountSelect;
     @FindBy(name = "message")
     private WebElement messageInput;
-    @FindBy(xpath = "//form//button")
+    @FindBy(css = "form button")
     private WebElement checkoutButton;
 
     public GiftCardPage(WebDriver driver) {
